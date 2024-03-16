@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.stereotype.Service;
 
 @Service
-@EnableMongoRepositories(basePackages = "com.june_we_118.gallefaceshoppingmall.Repo")
+@EnableMongoRepositories(basePackages = "com.june_we_118.gallefaceshoppingmall.Repo.SearchEngineRepo")
 public class SearchEngineService {
 
     @Autowired

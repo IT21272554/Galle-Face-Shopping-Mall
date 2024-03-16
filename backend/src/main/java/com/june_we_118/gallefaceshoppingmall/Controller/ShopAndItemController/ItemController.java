@@ -1,4 +1,4 @@
-package com.june_we_118.gallefaceshoppingmall.Controller.SearchEngineController.ShopAndItemController;
+package com.june_we_118.gallefaceshoppingmall.Controller.ShopAndItemController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

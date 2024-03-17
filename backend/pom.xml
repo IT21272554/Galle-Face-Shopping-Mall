@@ -8,7 +8,7 @@
 		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.june_we_118</groupId>
+	<groupId>com.dev</groupId>
 	<artifactId>gallefaceshoppingmall</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>gallefaceshoppingmall</name>

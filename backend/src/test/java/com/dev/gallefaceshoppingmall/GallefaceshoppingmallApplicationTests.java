@@ -1,4 +1,4 @@
-package com.june_we_118.gallefaceshoppingmall;
+package com.dev.gallefaceshoppingmall;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

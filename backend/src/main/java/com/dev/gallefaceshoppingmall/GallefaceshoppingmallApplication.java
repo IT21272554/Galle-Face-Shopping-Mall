@@ -1,4 +1,4 @@
-package com.june_we_118.gallefaceshoppingmall;
+package com.dev.gallefaceshoppingmall;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

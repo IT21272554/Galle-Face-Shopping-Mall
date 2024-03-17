@@ -1,4 +1,4 @@
-package com.june_we_118.gallefaceshoppingmall.Entity.ShopAndItemEntity;
+package com.dev.gallefaceshoppingmall.Entity.ShopAndItemEntity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

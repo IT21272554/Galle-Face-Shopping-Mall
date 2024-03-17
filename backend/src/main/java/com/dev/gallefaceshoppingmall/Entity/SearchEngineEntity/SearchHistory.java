@@ -1,4 +1,4 @@
-package com.june_we_118.gallefaceshoppingmall.Entity.SearchEngineEntity;
+package com.dev.gallefaceshoppingmall.Entity.SearchEngineEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

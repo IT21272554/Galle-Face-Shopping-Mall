@@ -1,7 +1,7 @@
-package com.june_we_118.gallefaceshoppingmall.Controller.SearchEngineController;
+package com.dev.gallefaceshoppingmall.Controller.SearchEngineController;
 
-import com.june_we_118.gallefaceshoppingmall.Entity.SearchEngineEntity.SearchHistory;
-import com.june_we_118.gallefaceshoppingmall.Service.SearchEngineService.SearchEngineService;
+import com.dev.gallefaceshoppingmall.Entity.SearchEngineEntity.SearchHistory;
+import com.dev.gallefaceshoppingmall.Service.SearchEngineService.SearchEngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
-package com.june_we_118.gallefaceshoppingmall.Repo.SearchEngineRepo;
+package com.dev.gallefaceshoppingmall.Repo.SearchEngineRepo;
 
-import com.june_we_118.gallefaceshoppingmall.Entity.SearchEngineEntity.SearchHistory;
+import com.dev.gallefaceshoppingmall.Entity.SearchEngineEntity.SearchHistory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 

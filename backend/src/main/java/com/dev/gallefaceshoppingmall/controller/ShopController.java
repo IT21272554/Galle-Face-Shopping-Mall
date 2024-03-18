@@ -1,4 +1,4 @@
-package com.dev.gallefaceshoppingmall.Controller.ShopAndItemController;
+package com.dev.gallefaceshoppingmall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dev.gallefaceshoppingmall.Entity.ShopAndItemEntity.Shop;
-import com.dev.gallefaceshoppingmall.Service.ShopAndItemService.ShopService;
+import com.dev.gallefaceshoppingmall.entity.Shop;
+import com.dev.gallefaceshoppingmall.service.ShopService;
 
 @Controller
 @CrossOrigin(origins = "*")
@@ -19,7 +19,7 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<?> saveShop(@RequestBody Shop shop){
 
         shopService.saveOrUpdate(shop);

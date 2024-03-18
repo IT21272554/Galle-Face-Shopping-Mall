@@ -1,7 +1,8 @@
-package com.dev.gallefaceshoppingmall.Repo.SearchEngineRepo;
+package com.dev.gallefaceshoppingmall.repository;
 
-import com.dev.gallefaceshoppingmall.Entity.SearchEngineEntity.SearchHistory;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.dev.gallefaceshoppingmall.entity.SearchHistory;
 
 
 public interface SearchEngineRepository extends MongoRepository<SearchHistory, String> {

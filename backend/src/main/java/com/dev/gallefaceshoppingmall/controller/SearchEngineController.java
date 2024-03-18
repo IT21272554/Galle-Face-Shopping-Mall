@@ -1,7 +1,5 @@
-package com.dev.gallefaceshoppingmall.Controller.SearchEngineController;
+package com.dev.gallefaceshoppingmall.controller;
 
-import com.dev.gallefaceshoppingmall.Entity.SearchEngineEntity.SearchHistory;
-import com.dev.gallefaceshoppingmall.Service.SearchEngineService.SearchEngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,6 +7,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.dev.gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.gallefaceshoppingmall.service.SearchEngineService;
 
 @Controller
 @CrossOrigin(origins = "*")

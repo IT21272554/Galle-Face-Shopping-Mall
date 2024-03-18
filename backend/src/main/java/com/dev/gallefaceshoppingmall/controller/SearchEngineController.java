@@ -1,4 +1,4 @@
-package com.dev.Gallefaceshoppingmall.controller;
+package com.dev.gallefaceshoppingmall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dev.Gallefaceshoppingmall.entity.SearchHistory;
-import com.dev.Gallefaceshoppingmall.service.SearchEngineService;
+import com.dev.gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.gallefaceshoppingmall.service.SearchEngineService;
 
 @Controller
 @CrossOrigin(origins = "*")

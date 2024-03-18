@@ -1,10 +1,10 @@
-package com.dev.Gallefaceshoppingmall.service;
+package com.dev.gallefaceshoppingmall.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dev.Gallefaceshoppingmall.entity.SearchHistory;
-import com.dev.Gallefaceshoppingmall.repository.SearchEngineRepository;
+import com.dev.gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.gallefaceshoppingmall.repository.SearchEngineRepository;
 
 @Service
 public class SearchEngineService {

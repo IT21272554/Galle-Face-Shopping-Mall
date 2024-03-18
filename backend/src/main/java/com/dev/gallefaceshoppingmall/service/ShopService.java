@@ -1,10 +1,10 @@
-package com.dev.gallefaceshoppingmall.service;
+package com.dev.Gallefaceshoppingmall.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dev.gallefaceshoppingmall.entity.Shop;
-import com.dev.gallefaceshoppingmall.repository.ShopRepository;
+import com.dev.Gallefaceshoppingmall.entity.Shop;
+import com.dev.Gallefaceshoppingmall.repository.ShopRepository;
 
 @Service
 public class ShopService {

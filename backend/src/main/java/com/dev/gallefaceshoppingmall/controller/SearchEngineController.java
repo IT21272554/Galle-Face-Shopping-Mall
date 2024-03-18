@@ -1,4 +1,4 @@
-package com.dev.gallefaceshoppingmall.controller;
+package com.dev.Gallefaceshoppingmall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dev.gallefaceshoppingmall.entity.SearchHistory;
-import com.dev.gallefaceshoppingmall.service.SearchEngineService;
+import com.dev.Gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.Gallefaceshoppingmall.service.SearchEngineService;
 
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/search")
 public class SearchEngineController {
 
-    @Autowired
+    @Autowired(required = true)
     private SearchEngineService searchEngineService;
 
     @PostMapping(value = "/save")

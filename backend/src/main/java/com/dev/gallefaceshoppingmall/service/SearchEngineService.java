@@ -1,14 +1,12 @@
-package com.dev.gallefaceshoppingmall.service;
+package com.dev.Gallefaceshoppingmall.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Service;
 
-import com.dev.gallefaceshoppingmall.entity.SearchHistory;
-import com.dev.gallefaceshoppingmall.repository.SearchEngineRepository;
+import com.dev.Gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.Gallefaceshoppingmall.repository.SearchEngineRepository;
 
 @Service
-@EnableMongoRepositories(basePackages = "com.dev.gallefaceshoppingmall.Repo.SearchEngineRepo")
 public class SearchEngineService {
 
     @Autowired

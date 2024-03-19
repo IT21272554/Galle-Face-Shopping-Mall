@@ -4,16 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-=======
-import org.springframework.web.bind.annotation.*;
->>>>>>> fa8fdd2040db713b1a22d50804193541fb83b997
 
 import com.dev.gallefaceshoppingmall.entity.User;
 import com.dev.gallefaceshoppingmall.service.UserService;
@@ -47,21 +44,6 @@ public class SignUpController {
         }
     }
 
-<<<<<<< HEAD
-    
-
-=======
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUserById(@PathVariable String id, @RequestBody User user) {
-        try {
-            userService.updateUser(id, user);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred while updating the user.");
-        }
-    }
     
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable String id) {
@@ -75,5 +57,4 @@ public class SignUpController {
         }
     }
     
->>>>>>> fa8fdd2040db713b1a22d50804193541fb83b997
 }

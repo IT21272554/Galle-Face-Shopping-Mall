@@ -18,6 +18,7 @@ public class Item {
     @Id
     private String _id;
     private String name;
+    private String description;
     private double price;
     private int quantity;
     private String category;

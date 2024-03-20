@@ -1,10 +1,10 @@
 package com.dev.gallefaceshoppingmall.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.List;
 
-import com.dev.gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.gallefaceshoppingmall.entity.Item;
 
+public interface SearchEngineRepository {
 
-public interface SearchEngineRepository extends MongoRepository<SearchHistory, String> {
-    
+    List<Item> searchItems(String query);
 }

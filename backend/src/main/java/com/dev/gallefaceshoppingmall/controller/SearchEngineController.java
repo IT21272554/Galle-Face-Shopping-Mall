@@ -1,14 +1,15 @@
 package com.dev.gallefaceshoppingmall.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dev.gallefaceshoppingmall.entity.SearchHistory;
+import com.dev.gallefaceshoppingmall.entity.Item;
 import com.dev.gallefaceshoppingmall.service.SearchEngineService;
 
 @Controller
@@ -16,13 +17,11 @@ import com.dev.gallefaceshoppingmall.service.SearchEngineService;
 @RequestMapping("/search")
 public class SearchEngineController {
 
-    @Autowired(required = true)
-    private SearchEngineService searchEngineService;
+    @Autowired
+    SearchEngineService searchEngineService;
 
-    @PostMapping(value = "/save")
-    public ResponseEntity<?> saveSearchHistory(@RequestBody SearchHistory searchHistory) {
-        searchEngineService.saveOrUpdate(searchHistory);
-        return ResponseEntity.ok().build();
+    @GetMapping("/query/{text}")
+    public List<Item> searchItemsOnly(@PathVariable String text){
+        return searchEngineService.searchItems(text);
     }
-
 }

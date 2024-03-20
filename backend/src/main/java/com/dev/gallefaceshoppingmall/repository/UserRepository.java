@@ -7,5 +7,7 @@ import com.dev.gallefaceshoppingmall.entity.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String>{
+
+    User findByEmail(String email);
     
 }

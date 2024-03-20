@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import Logo from "../Assets/Logo.png";
-import { BsCart2 } from "react-icons/bs";
+/*import { BsCart2 } from "react-icons/bs";*/
 import { HiOutlineBars3 } from "react-icons/hi2";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -51,9 +51,7 @@ const Navbar = () => {
         <a href="">About</a>
         <a href="">Store Directory</a>
         <a href="">Contact</a>
-        <a href="">
-          
-        </a>
+        <a href=""></a>
         <button className="primary-button">Sign in</button>
       </div>
       <div className="navbar-menu-container">

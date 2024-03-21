@@ -3,6 +3,9 @@ package com.dev.gallefaceshoppingmall.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,4 +20,5 @@ public class ParkingDetails {
     private int slotNumber;
     private String vehicleNumber;
     private String vehicleType;
+    private LocalDateTime timestamp; // New field for storing timestamp
 }

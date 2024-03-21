@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.dev.gallefaceshoppingmall.entity.ParkingDetails;
 import com.dev.gallefaceshoppingmall.repository.ParkingDetailsRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,7 +24,9 @@ public class ParkingDetailsService {
     }
 
     public ParkingDetails saveParkingDetails(ParkingDetails parkingDetails) {
+        parkingDetails.setTimestamp(LocalDateTime.now()); // Set current date and time
         return repository.save(parkingDetails);
     }
 
+    // Other service methods as needed
 }

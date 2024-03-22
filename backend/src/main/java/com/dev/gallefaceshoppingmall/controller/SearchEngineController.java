@@ -22,7 +22,7 @@ public class SearchEngineController {
     @Autowired
     SearchEngineService searchEngineService;
 
-    @GetMapping("/query/{text}")
+    @GetMapping("/items/{text}")
     public ResponseEntity<List<Item>> searchItemsOnly(@PathVariable String text){
         List<Item> items = searchEngineService.searchItems(text);
         return new ResponseEntity<>(items, HttpStatus.OK);

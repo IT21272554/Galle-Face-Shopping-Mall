@@ -9,11 +9,27 @@ import com.dev.gallefaceshoppingmall.repository.ShopRepository;
 @Service
 public class ShopService {
 
-    @Autowired(required = true)
-    ShopRepository shopRepository;
+    @Autowired
+    private ShopRepository shopRepository;
 
     public void saveOrUpdate(Shop shop){
 
         shopRepository.save(shop);
     }
+
+    public Iterable<Shop> listAll() {
+       
+        return this.shopRepository.findAll();
+    }
+
+    public void deleteShop(String _id) {
+        
+        shopRepository.deleteById(_id);
+    }
+
+    public Shop getShopById(String _id) {
+        
+        return shopRepository.findById(_id).get();
+    }
+
 }

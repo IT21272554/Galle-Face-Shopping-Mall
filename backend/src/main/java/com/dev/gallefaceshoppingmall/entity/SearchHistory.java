@@ -19,6 +19,6 @@ public class SearchHistory {
 
     @Id
     private String _id;
-    private String keyword;
+    private String itemID;
     private String customerID;
 }

@@ -1,21 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import Logo from "../Assets/Logo.png";
-import { BsCart2 } from "react-icons/bs";
-import { HiOutlineBars3 } from "react-icons/hi2";
+import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-import InfoIcon from "@mui/icons-material/Info";
-import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
-import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import React, { useState } from "react";
+import { HiOutlineBars3 } from "react-icons/hi2";
+import Logo from "../Assets/Logo.png";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -49,7 +48,7 @@ const Navbar = () => {
       <div className="navbar-links-container">
         <a href="">Home</a>
         <a href="">About</a>
-        <a href="">Store Directory</a>
+        <a href="/find">Find Products & Services</a>
         <a href="">Contact</a>
         <a href="">
           

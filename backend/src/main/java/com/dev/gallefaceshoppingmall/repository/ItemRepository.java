@@ -7,5 +7,7 @@ import com.dev.gallefaceshoppingmall.entity.Item;
 
 @Repository
 public interface ItemRepository extends MongoRepository<Item, String>{
+
+
     
 }

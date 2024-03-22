@@ -2,11 +2,26 @@ package com.dev.gallefaceshoppingmall.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 public interface JWTService {
 
-    String extractUserName(String token);
+    static String extractUserName(String token) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'extractUserName'");
+    }
 
-    String generateToken(UserDetails userDetails);
+    static String generateToken(UserDetails userDetails) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'generateToken'");
+    }
 
-    boolean isTokenValid(String token, UserDetails userDetails);
+    static boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extractUserName(token);
+        return (username.equals(userDetails.getUsername())&& !isTokenValid(token, userDetails));
+    }
+
+    static String extractUsername(String jwt) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'extractUsername'");
+    }
 }

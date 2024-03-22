@@ -39,19 +39,19 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
     final String jwt;
     final String userEmail;
 
-    if(StringUtils.isEmpty(authHeader) || !org.apache.commons.lang3.StringUtils.startsWith(authHeader, "Bearer ")) {
+    if(StringUtils.isEmpty(authHeader) || !org.apache.commons.lang3.StringUtils.startsWith(authHeader,"Bearer ")) {
         filterChain.doFilter(request, response);
         return;
     }
 
     jwt = authHeader.substring(7);
-    userEmail = jwtService.extractUserName(jwt);
+    userEmail = JWTService.extractUsername(jwt);
 
     if(StringUtils.isEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
         UserDetails userDetails = userservice.userDetailsService().loadUserByUsername(userEmail);
 
 
-        if(jwtService.isTokenValid(jwt, userDetails)){
+        if(JWTService.isTokenValid(jwt, userDetails)){
             SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
 
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
@@ -67,32 +67,5 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
     filterChain.doFilter(request, response);
 
 }
-    /*protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'doFilterInternal'");
-
-        final String authHeader = request.getHeader("Authorization");
-        final String jwt;
-        final String userEmail;
-
-        /*if(StringUtils.isEmpty(authHeader) || !org.apache.commons.lang3.StringUtils.startsWith(authHeader,prefix:"Bearer ")){
-            filterChain.doFilter(request, response);
-            return;
-        }
-        if(StringUtils.isEmpty(authHeader) || !!org.apache.commons.lang3.StringUtils.startsWith(authHeader, "Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUserName(jwt);
-
-        if(StringUtils.isEmpty(userEmail)&& SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = userservice.userDetailsService().loadUserByUsername(userEmail);
-        }
-        
-    
-    }*/
-
+   
 }

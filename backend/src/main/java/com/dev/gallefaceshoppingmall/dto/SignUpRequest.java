@@ -13,4 +13,9 @@ public class SignUpRequest {
     private String email;
 
     private String passoword;
+
+    public CharSequence getPassword() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
 }

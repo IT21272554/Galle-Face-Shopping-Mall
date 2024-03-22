@@ -43,5 +43,11 @@ public class ItemController {
          List<Item> items = itemService.allItems();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
+
+    @GetMapping("/popular")
+    public ResponseEntity<List<Item>> getPopularItems(){
+         List<Item> items = itemService.getPopular();
+        return new ResponseEntity<>(items, HttpStatus.OK);
+    }
     
 }

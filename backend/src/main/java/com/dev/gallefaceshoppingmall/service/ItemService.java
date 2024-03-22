@@ -24,5 +24,11 @@ public class ItemService {
 
         return items;
     }
+
+    public List<Item> getPopular(){
+        List<Item> items = itemRepository.findByViewCountGreaterThan(10);
+
+        return items;
+    }
     
 }

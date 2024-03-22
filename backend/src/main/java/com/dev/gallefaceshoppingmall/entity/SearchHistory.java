@@ -21,4 +21,5 @@ public class SearchHistory {
     private String _id;
     private String itemID;
     private String customerID;
+    private int viewCount;
 }

@@ -27,5 +27,6 @@ public class Item {
     private String shopId;
     private boolean isInStock = true;
     private String[] thumbnail = new String[4];
+    private int viewCount = 0;
     
 }

@@ -12,6 +12,7 @@ const Category = () => {
     const [items, setItems] = useState([])
     const [products, setProducts] = useState([]);
     const [text, setText] = useState('');
+    const [popularItems, setPopularItems] = useState([])
 
 
     const getItemsInCategory = async () => {
@@ -31,7 +32,7 @@ const Category = () => {
                 console.log(text);
                 const items = await axios.get(`${process.env.REACT_APP_API_URL}/search/items/category/${id}/${text}`)
                 console.log(items.data);
-                if(items.data.length < 1){
+                if(items?.data?.length < 1){
                     toast.error('No items')
                 }
                 setProducts(items.data);
@@ -41,6 +42,15 @@ const Category = () => {
         }
     }
 
+
+    const getPop = async ()=>{
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/item/popular`);
+            setPopularItems(res.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
 
         searchItems();
@@ -50,6 +60,7 @@ const Category = () => {
 
     useEffect(() => {
         getItemsInCategory()
+        getPop()
     }, [])
 
     return (
@@ -68,6 +79,15 @@ const Category = () => {
                 }
                 {
                    products.length > 0 && products.map((it) => (
+                        <ItemBox item={it} />
+                    ))
+                }
+            </div>
+            <br />
+            <h2>Popular Items</h2>
+            <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-8 gap-2'>
+            {
+                   popularItems.length > 0 && popularItems.map((it) => (
                         <ItemBox item={it} />
                     ))
                 }

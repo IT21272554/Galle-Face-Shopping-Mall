@@ -38,8 +38,12 @@ public class UserService {
         userRepository.save(existingUser);
     }
 
-    public User getUserById(String id) {
-        return userRepository.findById(id).orElse(null);
+    public User getUserById(String _id) {
+        return userRepository.findById(_id).orElse(null);
+    }
+
+    public User getuserbyemail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public void deleteUser(String _id) {
@@ -62,8 +66,19 @@ public class UserService {
     }
 
     public User loginUser(String email, String password) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loginUser'");
+        User user = null;
+        user = getuserbyemail(email);
+        String pwd =hashPassword(password);
+ if (user.getPassword().equals(pwd)){
+    System.out.println("***********User Login Successfull!***********");
+
+    return user;    
+}
+/*System.out.println(pwd);
+            System.out.println(user.getPassword());*/
+        
+return null;
+        
     }
     
     /*private boolean passwordMatches(String storedPassword, String providedPassword) {

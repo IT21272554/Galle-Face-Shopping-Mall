@@ -16,15 +16,17 @@ import com.dev.gallefaceshoppingmall.service.UserService;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/login")
+@RequestMapping("/signin")
 public class LoginController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/signin")
     public ResponseEntity<?> loginUser(@RequestBody LoginCredentials credentials) {
         try {
+            //System.out.println(credentials.getEmail());
+            //System.out.println(credentials.getPassword());
             User user = userService.loginUser(credentials.getEmail(), credentials.getPassword());
             if (user != null) {
                 // Login successful, you can return a token or any user information here

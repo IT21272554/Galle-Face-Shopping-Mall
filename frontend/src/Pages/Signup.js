@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Updated import
 
 const Signup = () => {
+  const navigate = useNavigate(); // Updated initialization
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -9,6 +11,7 @@ const Signup = () => {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -36,7 +39,21 @@ const Signup = () => {
 
       if (response.ok) {
         console.log('User registered successfully');
-        // Redirect or display success message
+        setIsRegistered(true); // Show the success message
+
+        // Reset form data
+        setFormData({
+          username: '',
+          email: '',
+          phone: '',
+          password: '',
+          confirmPassword: '',
+        });
+
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setIsRegistered(false);
+        }, 3000);
       } else {
         console.error('Failed to register user:', response.statusText);
         // Display error message
@@ -72,63 +89,69 @@ const Signup = () => {
   };
 
   return (
+    <div className='wrapper'>
     <div className="signup-container">
-      <h1>Sign Up</h1>
+      <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='input-box'>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
             name="username"
             id="username"
+            placeholder='Your name here'
             value={formData.username}
             onChange={handleChange}
             required
           />
           {errors.username && <p className="error">{errors.username}</p>}
         </div>
-        <div>
+        <div className='input-box'>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             name="email"
             id="email"
+            placeholder='example@gmail.com'
             value={formData.email}
             onChange={handleChange}
             required
           />
           {errors.email && <p className="error">{errors.email}</p>}
         </div>
-        <div>
+        <div className='input-box'>
           <label htmlFor="phone">Phone:</label>
           <input
             type="phone"
             name="phone"
             id="phone"
+            placeholder='+94 - XXX XXX X'
             value={formData.phone}
             onChange={handleChange}
             required
           />
           {errors.phone && <p className="error">{errors.phone}</p>}
         </div>
-        <div>
+        <div className='input-box'>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             name="password"
             id="password"
+            placeholder='Password'
             value={formData.password}
             onChange={handleChange}
             required
           />
           {errors.password && <p className="error">{errors.password}</p>}
         </div>
-        <div>
+        <div className='input-box'>
           <label htmlFor="confirmPassword">Confirm Password:</label>
           <input
             type="password"
             name="confirmPassword"
             id="confirmPassword"
+            placeholder='Confirm Password'
             value={formData.confirmPassword}
             onChange={handleChange}
             required
@@ -137,6 +160,16 @@ const Signup = () => {
         </div>
         <button type="submit">Sign Up</button>
       </form>
+      {isRegistered && (
+        <div className="success-message">
+          Account registered successfully! {/* Add styles for this message */}
+        </div> 
+      )}
+       <div>
+          <p>Already have an account? </p>
+          <button type='signin' onClick={() => navigate('/signin')}>Log In</button> {/* Updated navigation */}
+        </div>
+    </div>
     </div>
   );
 };

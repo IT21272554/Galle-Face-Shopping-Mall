@@ -4,8 +4,17 @@ public class LoginCredentials {
 
     private String email;
     private String password;
+  
+    public LoginCredentials(String email, String password) {
+      this.email = email;
+      this.password = password;
+    }
 
+    
+
+    //LoginCredentials credentials = new LoginCredentials("admin@gmail.com", "admin123");
     // Getter and Setter methods
+    
 
     public String getEmail() {
         return email;

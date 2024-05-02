@@ -1,4 +1,5 @@
 package com.dev.gallefaceshoppingmall.service;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,22 @@ public class ItemService {
     @Autowired(required = true)
     ItemRepository itemRepository;
 
-    public void saveOrUpdate(Item item){
+    public void saveOrUpdate(Item item) {
 
         itemRepository.save(item);
     }
 
-    public List<Item> allItems(){
-    
+    public List<Item> allItems() {
+
         List<Item> items = itemRepository.findAll();
 
         return items;
     }
 
-    public List<Item> getPopular(){
+    public List<Item> getPopular() {
         List<Item> items = itemRepository.findByViewCountGreaterThan(10);
 
         return items;
     }
-    
+
 }

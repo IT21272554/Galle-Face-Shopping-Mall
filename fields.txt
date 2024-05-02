@@ -1,0 +1,9 @@
+owner nic
+owner name
+vehicle number
+vehicle type
+slot number
+date
+check in
+check out
+price / fare

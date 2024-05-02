@@ -1,15 +1,14 @@
 import axios from 'axios';
 import {useEffect, useState } from "react";
  
-function Item()
+function Shop()
 {
 //Logic
-const [itemid, setId] = useState('');
+  const [shopid, setId] = useState('');
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [shopId, setShopId] = useState("");
-  const [items, setItems] = useState([]);
+  const [shops, setShops] = useState([]);
 
 
  
@@ -21,8 +20,8 @@ useEffect(() => {
   async function  Load()
   {
      const result = await axios.get(
-         "http://localhost:8090/item/getAll");
-         setItems(result.data);
+         "http://localhost:8090/shop/getAll");
+         setShops(result.data);
          console.log(result.data);
   }
  
@@ -33,41 +32,38 @@ useEffect(() => {
         event.preventDefault();
     try
         {
-         await axios.post("http://localhost:8090/item/save",
+         await axios.post("http://localhost:8090/shop/save",
         {
             name: name,
             description: description,
-            category: category,
-            shopId: shopId
+            category: category
         });
-          alert("Item Create Successfully");
+          alert("Shop Create Successfully");
           setId("");
           setName("");
           setDescription("");
           setCategory("");
-          setShopId("");
           Load();
         }
     catch(err)
         {
-          alert("Item Create Failed");
+          alert("Shop Create Failed");
         }
    }
 
  
-   async function editItem(items)
+   async function editShop(shops)
    {
-    setName(items.name);
-    setDescription(items.description);
-    setCategory(items.category);
-    setShopId(items.shopId);
-    setId(items._id);
+    setName(shops.name);
+    setDescription(shops.description);
+    setCategory(shops.category);
+    setId(shops._id);
    }
  
-   async function DeleteItem(itemid)
+   async function DeleteShop(shopid)
    {
-        await axios.delete("http://localhost:8090/item/delete/" + itemid); 
-        alert("Item deleted Successfully");
+        await axios.delete("http://localhost:8090/shop/delete/" + shopid); 
+        alert("Shop deleted Successfully");
         Load();
    }
  
@@ -77,38 +73,36 @@ useEffect(() => {
  
    try
        {
-        await axios.put("http://localhost:8090/item/edit/" + itemid ,
+        await axios.put("http://localhost:8090/shop/edit/" + shopid ,
        {
 
         name: name,
         description: description,
-        category: category,
-        shopId: shopId
+        category: category
        
        });
-         alert("Item Updated");
+         alert("Shop Updated");
          setId("");
          setName("");
          setDescription("");
          setCategory("");
-         setShopId("");
          Load();
        }
    catch(err)
        {
-         alert("Item Update Failed");
+         alert("Shop Update Failed");
        }
   }
 
   //Design
   return (
     <div>
-       <h1>Items Details</h1>
+       <h1>Shops Details</h1>
        <div class="container mt-4" >
           <form>
              
               <div class="form-group">
-                <label>Item Name</label>
+                <label>Shop Name</label>
                 <input  type="text" class="form-control" id="name"
                 value={name}
                 onChange={(event) =>
@@ -120,7 +114,7 @@ useEffect(() => {
 
 
               <div class="form-group">
-                <label>Item Description</label>
+                <label>Shop Description</label>
                 <input  type="text" class="form-control" id="description" 
                  value={description}
                   onChange={(event) =>
@@ -131,7 +125,7 @@ useEffect(() => {
               </div>
 
               <div class="form-group">
-                <label>Item Category</label>
+                <label>Shop Category</label>
                 <input type="text" class="form-control" id="category" 
                   value={category}
                 onChange={(event) =>
@@ -141,18 +135,6 @@ useEffect(() => {
                 />
                 </div>
 
-               <div class="form-group">
-                <label>Item ShopId</label>
-                <input type="text" class="form-control" id="shopId" 
-                  value={shopId}
-                onChange={(event) =>
-                  {
-                    setShopId(event.target.value);      
-                  }}
-                /> 
-
-
-              </div>
               <div>
               <button   class="btn btn-primary mt-4"  onClick={save}>Create</button>
 
@@ -167,23 +149,21 @@ useEffect(() => {
       <th scope="col">Item Name</th>
       <th scope="col">Item Description</th>
       <th scope="col">Item Category</th>
-      <th scope="col">Item ShopId</th>
       
       <th scope="col">Option</th>
     </tr>
   </thead>
-       {items.map(function fn(item)
+       {shops.map(function fn(shop)
        {
             return(
             <tbody>
                 <tr>
-                <td>{item.name}</td>
-                <td>{item.description}</td>
-                <td>{item.category}</td>
-                <td>{item.shopId}</td>        
+                <td>{shop.name}</td>
+                <td>{shop.description}</td>
+                <td>{shop.category}</td>       
                 <td>
-                    <button type="button" class="btn btn-warning"  onClick={() => editItem(item)} >Edit</button>  
-                    <button type="button" class="btn btn-danger" onClick={() => DeleteItem(item._id)}>Delete</button>
+                    <button type="button" class="btn btn-warning"  onClick={() => editShop(shop)} >Edit</button>  
+                    <button type="button" class="btn btn-danger" onClick={() => DeleteShop(shop._id)}>Delete</button>
                 </td>
                 </tr>
             </tbody>
@@ -194,4 +174,4 @@ useEffect(() => {
             );
         }
   
-  export default Item;
+  export default Shop;

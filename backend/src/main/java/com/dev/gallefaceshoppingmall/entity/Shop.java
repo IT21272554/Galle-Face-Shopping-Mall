@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collection = "shop")
+@Document(collection = "shops")
 @Getter
 @Setter
 @NoArgsConstructor

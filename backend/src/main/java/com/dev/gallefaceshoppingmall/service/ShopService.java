@@ -12,9 +12,9 @@ public class ShopService {
     @Autowired
     private ShopRepository shopRepository;
 
-    public void saveOrUpdate(Shop shop){
+    public void saveOrUpdate(Shop shops){
 
-        shopRepository.save(shop);
+        shopRepository.save(shops);
     }
 
     public Iterable<Shop> listAll() {

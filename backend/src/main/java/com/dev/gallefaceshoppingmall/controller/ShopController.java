@@ -23,11 +23,11 @@ public class ShopController {
     private ShopService shopService;
 
     @PostMapping(value = "/save")
-    private String saveShop(@RequestBody Shop shop)
+    private String saveShop(@RequestBody Shop shops)
     {
 
-        shopService.saveOrUpdate(shop);
-        return shop.get_id();
+        shopService.saveOrUpdate(shops);
+        return shops.get_id();
     }
 
     @GetMapping(value = "/getAll")
@@ -37,11 +37,11 @@ public class ShopController {
     }
 
     @PutMapping(value = "/edit/{id}")
-    private Shop update(@RequestBody Shop shop1,@PathVariable(name = "id")String _id)
+    private Shop update(@RequestBody Shop shop,@PathVariable(name = "id")String _id)
     {
-        shop1.set_id(_id);
-        shopService.saveOrUpdate(shop1);
-        return shop1;
+        shop.set_id(_id);
+        shopService.saveOrUpdate(shop);
+        return shop;
     }
 
     @DeleteMapping("/delete/{id}")

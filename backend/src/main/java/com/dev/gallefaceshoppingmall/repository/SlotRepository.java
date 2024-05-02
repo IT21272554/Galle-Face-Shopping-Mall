@@ -1,11 +1,9 @@
 package com.dev.gallefaceshoppingmall.repository;
 
+import com.dev.gallefaceshoppingmall.entity.Slot;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.dev.gallefaceshoppingmall.entity.Shop;
-
 @Repository
-public interface ShopRepository extends MongoRepository<Shop, String>{
-
+public interface SlotRepository extends MongoRepository<Slot, String> {
 }

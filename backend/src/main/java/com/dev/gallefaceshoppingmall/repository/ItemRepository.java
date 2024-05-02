@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.dev.gallefaceshoppingmall.entity.Item;
 
 @Repository
-public interface ItemRepository extends MongoRepository<Item, String>{
+public interface ItemRepository extends MongoRepository<Item, String> {
 
     List<Item> findByViewCountGreaterThan(int viewCount);
 
-    
 }

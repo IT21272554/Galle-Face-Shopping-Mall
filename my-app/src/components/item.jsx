@@ -10,6 +10,9 @@ function Item() {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
     const [shopId, setShopId] = useState("");
+    const [price, setPrice] = useState(0);
+    const [quantity, setQuantity] = useState(0);
+    const [thumbnail, setThumbnail] = useState(["", "", "", ""]);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -32,7 +35,10 @@ function Item() {
                 name: name,
                 description: description,
                 category: category,
-                shopId: shopId
+                shopId: shopId,
+                price: price,
+                quantity: quantity,
+                thumbnail: thumbnail
             });
             alert("Item created successfully");
             clearFields();
@@ -48,6 +54,9 @@ function Item() {
         setCategory(item.category);
         setShopId(item.shopId);
         setId(item._id);
+        setPrice(item.price);
+        setQuantity(item.quantity);
+        setThumbnail(item.thumbnail);
     }
 
     async function DeleteItem(itemId) {
@@ -67,7 +76,10 @@ function Item() {
                 name: name,
                 description: description,
                 category: category,
-                shopId: shopId
+                shopId: shopId,
+                price: price,
+                quantity: quantity,
+                thumbnail: thumbnail
             });
             alert("Item updated successfully");
             clearFields();
@@ -83,6 +95,9 @@ function Item() {
         setDescription("");
         setCategory("");
         setShopId("");
+        setPrice(0);
+        setQuantity(0);
+        setThumbnail(["", "", "", ""]);
     }
 
     async function downloadReport() {
@@ -105,7 +120,6 @@ function Item() {
   
       doc.save('items_report.pdf');
   }
-  
 
     // Design
     return (
@@ -114,56 +128,89 @@ function Item() {
             <div className="container mt-4">
                 <form>
                     {/* Form inputs */}
-                    <div class="form-group">
-                <label>Item Name</label>
-                <input  type="text" class="form-control" id="name"
-                value={name}
-                onChange={(event) =>
-                  {
-                    setName(event.target.value);      
-                  }}
-                />
-              </div>
+                    <div className="form-group">
+                        <label>Item Name</label>
+                        <input type="text" className="form-control" id="name"
+                               value={name}
+                               onChange={(event) => {
+                                   setName(event.target.value);
+                               }}
+                        />
+                    </div>
 
+                    <div className="form-group">
+                        <label>Item Description</label>
+                        <input type="text" className="form-control" id="description"
+                               value={description}
+                               onChange={(event) => {
+                                   setDescription(event.target.value);
+                               }}
+                        />
+                    </div>
 
-              <div class="form-group">
-                <label>Item Description</label>
-                <input  type="text" class="form-control" id="description" 
-                 value={description}
-                  onChange={(event) =>
-                    {
-                      setDescription(event.target.value);      
-                    }}
-                />
-              </div>
+                    <div className="form-group">
+                        <label>Item Category</label>
+                        <select className="form-control" id="category"
+                               value={category}
+                               onChange={(event) => {
+                                   setCategory(event.target.value);
+                               }}
+                        >
+                            <option value="">Select category...</option>
+                            <option value="Electronics & Technology">Electronics & Technology</option>
+                            <option value="Apparel & Fashion">Apparel & Fashion</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Home & Decor">Home & Decor</option>
+                            <option value="Health & Beauty">Health & Beauty</option>
+                            <option value="Entertainment">Entertainment</option>
+                        </select>
+                    </div>
 
-              <div class="form-group">
-                <label>Item Category</label>
-                <input type="text" class="form-control" id="category" 
-                  value={category}
-                onChange={(event) =>
-                  {
-                    setCategory(event.target.value);      
-                  }}
-                />
-                </div>
+                    <div className="form-group">
+                        <label>Item ShopId</label>
+                        <input type="text" className="form-control" id="shopId"
+                               value={shopId}
+                               onChange={(event) => {
+                                   setShopId(event.target.value);
+                               }}
+                        />
+                    </div>
 
-               <div class="form-group">
-                <label>Item ShopId</label>
-                <input type="text" class="form-control" id="shopId" 
-                  value={shopId}
-                onChange={(event) =>
-                  {
-                    setShopId(event.target.value);      
-                  }}
-                /> 
+                    {/* Additional Inputs */}
+                    <div className="form-group">
+                        <label>Price</label>
+                        <input type="number" className="form-control" value={price}
+                               onChange={(event) => {
+                                   setPrice(event.target.value);
+                               }}
+                        />
+                    </div>
 
+                    <div className="form-group">
+                        <label>Quantity</label>
+                        <input type="number" className="form-control" value={quantity}
+                               onChange={(event) => {
+                                   setQuantity(event.target.value);
+                               }}
+                        />
+                    </div>
 
-              </div>
-              <div>
-                    <button className="btn btn-primary mt-4" onClick={save}>Create</button>
-                    <button className="btn btn-warning mt-4" onClick={update}>Update</button>
-              </div>
+                    {/* Thumbnail */}
+                    <div className="form-group">
+                        <label>Thumbnail</label>
+                        <input type="text" className="form-control" value={thumbnail[0]}
+                               onChange={(event) => {
+                                   let newThumbnail = [...thumbnail];
+                                   newThumbnail[0] = event.target.value;
+                                   setThumbnail(newThumbnail);
+                               }}
+                        />
+                    </div>
+
+                    <div>
+                        <button className="btn btn-primary mt-4" onClick={save}>Create</button>
+                        <button className="btn btn-warning mt-4" onClick={update}>Update</button>
+                    </div>
                 </form>
             </div>
 
@@ -177,6 +224,9 @@ function Item() {
                         <th scope="col">Item Description</th>
                         <th scope="col">Item Category</th>
                         <th scope="col">Item ShopId</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Thumbnail</th>
                         <th scope="col">Option</th>
                     </tr>
                 </thead>
@@ -187,6 +237,9 @@ function Item() {
                             <td>{item.description}</td>
                             <td>{item.category}</td>
                             <td>{item.shopId}</td>
+                            <td>{item.price}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.thumbnail.join(',')}</td>
                             <td>
                                 <button type="button" className="btn btn-warning" onClick={() => editItem(item)}>Edit</button>
                                 <button type="button" className="btn btn-danger" onClick={() => DeleteItem(item._id)}>Delete</button>

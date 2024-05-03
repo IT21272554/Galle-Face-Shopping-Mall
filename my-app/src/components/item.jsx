@@ -14,6 +14,7 @@ function Item() {
     const [quantity, setQuantity] = useState(0);
     const [thumbnail, setThumbnail] = useState(["", "", "", ""]);
     const [items, setItems] = useState([]);
+    const [validationError, setValidationError] = useState("");
 
     useEffect(() => {
         Load();
@@ -30,6 +31,9 @@ function Item() {
 
     async function save(event) {
         event.preventDefault();
+        if (!validateInputs()) {
+            return;
+        }
         try {
             await axios.post("http://localhost:8090/item/save", {
                 name: name,
@@ -71,6 +75,9 @@ function Item() {
 
     async function update(event) {
         event.preventDefault();
+        if (!validateInputs()) {
+            return;
+        }
         try {
             await axios.put("http://localhost:8090/item/edit/" + itemid, {
                 name: name,
@@ -98,6 +105,15 @@ function Item() {
         setPrice(0);
         setQuantity(0);
         setThumbnail(["", "", "", ""]);
+        setValidationError("");
+    }
+
+    function validateInputs() {
+        if (!name || !description || !category || !shopId) {
+            setValidationError("All fields are required");
+            return false;
+        }
+        return true;
     }
 
     async function downloadReport() {
@@ -195,6 +211,8 @@ function Item() {
                                }}
                         />
                     </div>
+
+                    {validationError && <div className="alert alert-danger">{validationError}</div>}
 
                     <div>
                         <button className="btn btn-primary mt-4" onClick={save}>Create</button>

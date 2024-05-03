@@ -17,6 +17,7 @@ function Shop() {
     const [openingTime, setOpeningTime] = useState("");
     const [closingTime, setClosingTime] = useState("");
     const [shops, setShops] = useState([]);
+    const [validationError, setValidationError] = useState("");
 
     useEffect(() => {
         Load();
@@ -33,6 +34,9 @@ function Shop() {
 
     async function save(event) {
         event.preventDefault();
+        if (!validateInputs()) {
+            return;
+        }
         try {
             await axios.post("http://localhost:8090/shop/save", {
                 name: name,
@@ -80,6 +84,9 @@ function Shop() {
 
     async function update(event) {
         event.preventDefault();
+        if (!validateInputs()) {
+            return;
+        }
         try {
             await axios.put("http://localhost:8090/shop/edit/" + shopId, {
                 name: name,
@@ -113,6 +120,15 @@ function Shop() {
         setOpeningTime("");
         setClosingTime("");
         setLogoImage("");
+        setValidationError("");
+    }
+
+    function validateInputs() {
+        if (!name || !description || !category || !ownerName || !contactNumber || !email || !openingTime || !closingTime) {
+            setValidationError("All fields are required");
+            return false;
+        }
+        return true;
     }
 
     async function downloadReport() {
@@ -244,6 +260,7 @@ function Shop() {
                         />
                     </div>
 
+                    {validationError && <div className="alert alert-danger">{validationError}</div>}
 
                     <div>
                         <button className="btn btn-primary mt-4" onClick={save}>Create</button>

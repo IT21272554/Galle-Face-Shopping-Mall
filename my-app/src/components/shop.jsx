@@ -128,6 +128,17 @@ function Shop() {
             setValidationError("All fields are required");
             return false;
         }
+
+        if (!/^\d{10}$/.test(contactNumber)) {
+            setValidationError("Contact Number should be 10 digits");
+            return false;
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            setValidationError("Invalid email address");
+            return false;
+        }
+
         return true;
     }
 
@@ -215,14 +226,15 @@ function Shop() {
                         <input type="text" className="form-control" id="contactNumber"
                                value={contactNumber}
                                onChange={(event) => {
-                                   setContactNumber(event.target.value);
+                                   const input = event.target.value.replace(/\D/, ''); // Remove non-numeric characters
+                                   setContactNumber(input);
                                }}
                         />
                     </div>
 
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="text" className="form-control" id="email"
+                        <input type="email" className="form-control" id="email"
                                value={email}
                                onChange={(event) => {
                                    setEmail(event.target.value);

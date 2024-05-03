@@ -46,6 +46,7 @@ const Navbar = () => {
         <img src={Logo} width="300px" height="100px"></img>
       </div>
       <div className="navbar-links-container">
+       <a href="/dashboard">Parking</a>
         <a href="">Home</a>
         <a href="">About</a>
         <a href="/find">Find Products & Services</a>

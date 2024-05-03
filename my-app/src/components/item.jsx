@@ -141,7 +141,8 @@ function Item() {
     return (
         <div>
             <br />
-            <h1>Items Details</h1>
+            <h1 style={{textAlign: 'center'}}>Item Details</h1>
+            <br />
             <div className="container mt-4">
                 <form>
                     {/* Form inputs */}

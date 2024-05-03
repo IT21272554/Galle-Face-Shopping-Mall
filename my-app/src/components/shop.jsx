@@ -177,7 +177,8 @@ function Shop() {
     return (
         <div>
             <br />
-            <h1>Shops Details</h1>
+            <h1 style={{textAlign: 'center'}}>Shop Details</h1>
+            <br />
             <div className="container mt-4">
                 <form>
                     {/* Form inputs */}

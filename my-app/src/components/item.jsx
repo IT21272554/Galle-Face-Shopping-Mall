@@ -113,7 +113,7 @@ function Item() {
           scrollY: -window.scrollY 
       }).then(canvas => {
           const imgData = canvas.toDataURL('image/png');
-          const imgWidth = 230; // A4 size
+          const imgWidth = 235; // A4 size
           const imgHeight = (canvas.height * imgWidth) / canvas.width;
           doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
       });
@@ -140,7 +140,7 @@ function Item() {
                     </div>
 
                     <div className="form-group">
-                        <label>Item Description</label>
+                        <label>Description</label>
                         <input type="text" className="form-control" id="description"
                                value={description}
                                onChange={(event) => {
@@ -150,7 +150,7 @@ function Item() {
                     </div>
 
                     <div className="form-group">
-                        <label>Item Category</label>
+                        <label>Category</label>
                         <select className="form-control" id="category"
                                value={category}
                                onChange={(event) => {
@@ -168,7 +168,7 @@ function Item() {
                     </div>
 
                     <div className="form-group">
-                        <label>Item ShopId</label>
+                        <label>ShopId</label>
                         <input type="text" className="form-control" id="shopId"
                                value={shopId}
                                onChange={(event) => {
@@ -196,18 +196,6 @@ function Item() {
                         />
                     </div>
 
-                    {/* Thumbnail */}
-                    <div className="form-group">
-                        <label>Thumbnail</label>
-                        <input type="text" className="form-control" value={thumbnail[0]}
-                               onChange={(event) => {
-                                   let newThumbnail = [...thumbnail];
-                                   newThumbnail[0] = event.target.value;
-                                   setThumbnail(newThumbnail);
-                               }}
-                        />
-                    </div>
-
                     <div>
                         <button className="btn btn-primary mt-4" onClick={save}>Create</button>
                         <button className="btn btn-warning mt-4" onClick={update}>Update</button>
@@ -222,12 +210,11 @@ function Item() {
                 <thead>
                     <tr>
                         <th scope="col">Item Name</th>
-                        <th scope="col">Item Description</th>
-                        <th scope="col">Item Category</th>
-                        <th scope="col">Item ShopId</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">ShopId</th>
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
-                        <th scope="col">Thumbnail</th>
                         <th scope="col">Option</th>
                     </tr>
                 </thead>
@@ -240,7 +227,6 @@ function Item() {
                             <td>{item.shopId}</td>
                             <td>{item.price}</td>
                             <td>{item.quantity}</td>
-                            <td>{item.thumbnail.join(',')}</td>
                             <td>
                                 <button type="button" className="btn btn-warning" onClick={() => editItem(item)}>Edit</button>
                                 <button type="button" className="btn btn-danger" onClick={() => DeleteItem(item._id)}>Delete</button>

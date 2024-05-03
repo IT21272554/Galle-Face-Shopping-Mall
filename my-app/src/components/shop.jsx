@@ -128,7 +128,7 @@ function Shop() {
             scrollY: -window.scrollY
         }).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
-            const imgWidth = 220; // A4 size
+            const imgWidth = 215; // A4 size
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
         });
@@ -155,7 +155,7 @@ function Shop() {
                     </div>
 
                     <div className="form-group">
-                        <label>Shop Description</label>
+                        <label>Description</label>
                         <input type="text" className="form-control" id="description"
                                value={description}
                                onChange={(event) => {
@@ -165,7 +165,7 @@ function Shop() {
                     </div>
 
                     <div className="form-group">
-                        <label>Shop Category</label>
+                        <label>Category</label>
                         <select className="form-control" id="category"
                                value={category}
                                onChange={(event) => {
@@ -244,15 +244,6 @@ function Shop() {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label>Shop Logo Image</label>
-                        <input type="text" className="form-control" id="logoImage"
-                               value={logoImage}
-                               onChange={(event) => {
-                                   setLogoImage(event.target.value);
-                               }}
-                        />
-                    </div>
 
                     <div>
                         <button className="btn btn-primary mt-4" onClick={save}>Create</button>
@@ -267,22 +258,23 @@ function Shop() {
             <table id="tableToExport" className="table table-dark" align="center">
                 <thead>
                     <tr>
+                        <th scope="col">Shop ID</th>
                         <th scope="col">Shop Name</th>
-                        <th scope="col">Shop Description</th>
-                        <th scope="col">Shop Category</th>
-                        <th scope="col">Owner Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Contact Number</th>
                         <th scope="col">Email</th>
                         <th scope="col">Floor Number</th>
                         <th scope="col">Opening Time</th>
                         <th scope="col">Closing Time</th>
-                        <th scope="col">Shop Logo Image</th>
                         <th scope="col">Option</th>
                     </tr>
                 </thead>
                 <tbody>
                     {shops.map(shop => (
                         <tr key={shop._id}>
+                            <td>{shop._id}</td>
                             <td>{shop.name}</td>
                             <td>{shop.description}</td>
                             <td>{shop.category}</td>
@@ -292,7 +284,6 @@ function Shop() {
                             <td>{shop.floorNumber}</td>
                             <td>{shop.openingTime}</td>
                             <td>{shop.closingTime}</td>
-                            <td>{shop.logoImage}</td>
                             <td>
                                 <button type="button" className="btn btn-warning" onClick={() => editShop(shop)}>Edit</button>
                                 <button type="button" className="btn btn-danger" onClick={() => DeleteShop(shop._id)}>Delete</button>

@@ -139,6 +139,16 @@ function Shop() {
             return false;
         }
 
+        if (!/^([01]\d|2[0-3]):([0-5]\d)$/.test(openingTime)) {
+            setValidationError("Opening Time should be in HH:MM format (24-hour clock)");
+            return false;
+        }
+
+        if (!/^([01]\d|2[0-3]):([0-5]\d)$/.test(closingTime)) {
+            setValidationError("Closing Time should be in HH:MM format (24-hour clock)");
+            return false;
+        }
+
         return true;
     }
 

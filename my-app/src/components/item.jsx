@@ -124,6 +124,7 @@ function Item() {
     // Design
     return (
         <div>
+            <br />
             <h1>Items Details</h1>
             <div className="container mt-4">
                 <form>

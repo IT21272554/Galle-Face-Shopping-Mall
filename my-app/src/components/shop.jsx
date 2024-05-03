@@ -1,177 +1,314 @@
 import axios from 'axios';
-import {useEffect, useState } from "react";
- 
-function Shop()
-{
-//Logic
-  const [shopid, setId] = useState('');
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [shops, setShops] = useState([]);
+import { useEffect, useState } from "react";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
+function Shop() {
+    // Logic
+    const [shopId, setShopId] = useState('');
+    const [name, setName] = useState("");
+    const [logoImage, setLogoImage] = useState("");
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("");
+    const [ownerName, setOwnerName] = useState("");
+    const [contactNumber, setContactNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [floorNumber, setFloorNumber] = useState(0);
+    const [openingTime, setOpeningTime] = useState("");
+    const [closingTime, setClosingTime] = useState("");
+    const [shops, setShops] = useState([]);
 
- 
-useEffect(() => {
-  (async () => await Load())();
-  }, []);
- 
- 
-  async function  Load()
-  {
-     const result = await axios.get(
-         "http://localhost:8090/shop/getAll");
-         setShops(result.data);
-         console.log(result.data);
-  }
- 
-
-  
-     async function save(event)
-    {
-        event.preventDefault();
-    try
-        {
-         await axios.post("http://localhost:8090/shop/save",
-        {
-            name: name,
-            description: description,
-            category: category
-        });
-          alert("Shop Create Successfully");
-          setId("");
-          setName("");
-          setDescription("");
-          setCategory("");
-          Load();
-        }
-    catch(err)
-        {
-          alert("Shop Create Failed");
-        }
-   }
-
- 
-   async function editShop(shops)
-   {
-    setName(shops.name);
-    setDescription(shops.description);
-    setCategory(shops.category);
-    setId(shops._id);
-   }
- 
-   async function DeleteShop(shopid)
-   {
-        await axios.delete("http://localhost:8090/shop/delete/" + shopid); 
-        alert("Shop deleted Successfully");
+    useEffect(() => {
         Load();
-   }
- 
-   async function update(event)
-   {
-    event.preventDefault();
- 
-   try
-       {
-        await axios.put("http://localhost:8090/shop/edit/" + shopid ,
-       {
+    }, []);
 
-        name: name,
-        description: description,
-        category: category
-       
-       });
-         alert("Shop Updated");
-         setId("");
-         setName("");
-         setDescription("");
-         setCategory("");
-         Load();
-       }
-   catch(err)
-       {
-         alert("Shop Update Failed");
-       }
-  }
-
-  //Design
-  return (
-    <div>
-       <h1>Shops Details</h1>
-       <div class="container mt-4" >
-          <form>
-             
-              <div class="form-group">
-                <label>Shop Name</label>
-                <input  type="text" class="form-control" id="name"
-                value={name}
-                onChange={(event) =>
-                  {
-                    setName(event.target.value);      
-                  }}
-                />
-              </div>
-
-
-              <div class="form-group">
-                <label>Shop Description</label>
-                <input  type="text" class="form-control" id="description" 
-                 value={description}
-                  onChange={(event) =>
-                    {
-                      setDescription(event.target.value);      
-                    }}
-                />
-              </div>
-
-              <div class="form-group">
-                <label>Shop Category</label>
-                <input type="text" class="form-control" id="category" 
-                  value={category}
-                onChange={(event) =>
-                  {
-                    setCategory(event.target.value);      
-                  }}
-                />
-                </div>
-
-              <div>
-              <button   class="btn btn-primary mt-4"  onClick={save}>Create</button>
-
-              <button   class="btn btn-warning mt-4"  onClick={update}>Update</button>
-              </div>   
-            </form>
-          </div>
-                <br/>
-<table class="table table-dark" align="center">
-  <thead>
-    <tr>
-      <th scope="col">Item Name</th>
-      <th scope="col">Item Description</th>
-      <th scope="col">Item Category</th>
-      
-      <th scope="col">Option</th>
-    </tr>
-  </thead>
-       {shops.map(function fn(shop)
-       {
-            return(
-            <tbody>
-                <tr>
-                <td>{shop.name}</td>
-                <td>{shop.description}</td>
-                <td>{shop.category}</td>       
-                <td>
-                    <button type="button" class="btn btn-warning"  onClick={() => editShop(shop)} >Edit</button>  
-                    <button type="button" class="btn btn-danger" onClick={() => DeleteShop(shop._id)}>Delete</button>
-                </td>
-                </tr>
-            </tbody>
-            );
-            })}
-            </table>
-       </div>
-            );
+    async function Load() {
+        try {
+            const result = await axios.get("http://localhost:8090/shop/getAll");
+            setShops(result.data);
+        } catch (err) {
+            console.error("Error loading shops:", err);
         }
-  
-  export default Shop;
+    }
+
+    async function save(event) {
+        event.preventDefault();
+        try {
+            await axios.post("http://localhost:8090/shop/save", {
+                name: name,
+                description: description,
+                category: category,
+                ownerName: ownerName,
+                contactNumber: contactNumber,
+                email: email,
+                floorNumber: floorNumber,
+                openingTime: openingTime,
+                closingTime: closingTime,
+                logoImage: logoImage
+            });
+            alert("Shop created successfully");
+            clearFields();
+            Load();
+        } catch (err) {
+            alert("Shop creation failed");
+        }
+    }
+
+    async function editShop(shop) {
+        setName(shop.name);
+        setDescription(shop.description);
+        setCategory(shop.category);
+        setOwnerName(shop.ownerName);
+        setContactNumber(shop.contactNumber);
+        setEmail(shop.email);
+        setFloorNumber(shop.floorNumber);
+        setOpeningTime(shop.openingTime);
+        setClosingTime(shop.closingTime);
+        setLogoImage(shop.logoImage);
+        setShopId(shop._id);
+    }
+
+    async function DeleteShop(shopId) {
+        try {
+            await axios.delete("http://localhost:8090/shop/delete/" + shopId);
+            alert("Shop deleted successfully");
+            Load();
+        } catch (err) {
+            alert("Shop deletion failed");
+        }
+    }
+
+    async function update(event) {
+        event.preventDefault();
+        try {
+            await axios.put("http://localhost:8090/shop/edit/" + shopId, {
+                name: name,
+                description: description,
+                category: category,
+                ownerName: ownerName,
+                contactNumber: contactNumber,
+                email: email,
+                floorNumber: floorNumber,
+                openingTime: openingTime,
+                closingTime: closingTime,
+                logoImage: logoImage
+            });
+            alert("Shop updated successfully");
+            clearFields();
+            Load();
+        } catch (err) {
+            alert("Shop update failed");
+        }
+    }
+
+    function clearFields() {
+        setShopId("");
+        setName("");
+        setDescription("");
+        setCategory("");
+        setOwnerName("");
+        setContactNumber("");
+        setEmail("");
+        setFloorNumber(0);
+        setOpeningTime("");
+        setClosingTime("");
+        setLogoImage("");
+    }
+
+    async function downloadReport() {
+        const doc = new jsPDF();
+
+        const table = document.getElementById('tableToExport');
+        const tableWidth = table.offsetWidth;
+        const tableHeight = table.offsetHeight;
+
+        await html2canvas(table, {
+            width: tableWidth,
+            height: tableHeight,
+            scrollY: -window.scrollY
+        }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 220; // A4 size
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+        });
+
+        doc.save('shops_report.pdf');
+    }
+
+    // Design
+    return (
+        <div>
+            <br />
+            <h1>Shops Details</h1>
+            <div className="container mt-4">
+                <form>
+                    {/* Form inputs */}
+                    <div className="form-group">
+                        <label>Shop Name</label>
+                        <input type="text" className="form-control" id="name"
+                               value={name}
+                               onChange={(event) => {
+                                   setName(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Shop Description</label>
+                        <input type="text" className="form-control" id="description"
+                               value={description}
+                               onChange={(event) => {
+                                   setDescription(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Shop Category</label>
+                        <select className="form-control" id="category"
+                               value={category}
+                               onChange={(event) => {
+                                   setCategory(event.target.value);
+                               }}
+                        >
+                            <option value="">Select Category</option>
+                            <option value="Apparel & Fashion">Apparel & Fashion</option>
+                            <option value="Electronics & Technology">Electronics & Technology</option>
+                            <option value="Home & Decor">Home & Decor</option>
+                            <option value="Health & Beauty">Health & Beauty</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Services">Services</option>
+                            <option value="Specialty Stores">Specialty Stores</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Owner Name</label>
+                        <input type="text" className="form-control" id="ownerName"
+                               value={ownerName}
+                               onChange={(event) => {
+                                   setOwnerName(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" className="form-control" id="contactNumber"
+                               value={contactNumber}
+                               onChange={(event) => {
+                                   setContactNumber(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="text" className="form-control" id="email"
+                               value={email}
+                               onChange={(event) => {
+                                   setEmail(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Floor Number</label>
+                        <input type="number" className="form-control" id="floorNumber"
+                               value={floorNumber}
+                               onChange={(event) => {
+                                   setFloorNumber(parseInt(event.target.value));
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Opening Time</label>
+                        <input type="text" className="form-control" id="openingTime"
+                               value={openingTime}
+                               onChange={(event) => {
+                                   setOpeningTime(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Closing Time</label>
+                        <input type="text" className="form-control" id="closingTime"
+                               value={closingTime}
+                               onChange={(event) => {
+                                   setClosingTime(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Shop Logo Image</label>
+                        <input type="text" className="form-control" id="logoImage"
+                               value={logoImage}
+                               onChange={(event) => {
+                                   setLogoImage(event.target.value);
+                               }}
+                        />
+                    </div>
+
+                    <div>
+                        <button className="btn btn-primary mt-4" onClick={save}>Create</button>
+                        <button className="btn btn-warning mt-4" onClick={update}>Update</button>
+                    </div>
+                </form>
+            </div>
+
+            <br />
+
+            {/* Table */}
+            <table id="tableToExport" className="table table-dark" align="center">
+                <thead>
+                    <tr>
+                        <th scope="col">Shop Name</th>
+                        <th scope="col">Shop Description</th>
+                        <th scope="col">Shop Category</th>
+                        <th scope="col">Owner Name</th>
+                        <th scope="col">Contact Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Floor Number</th>
+                        <th scope="col">Opening Time</th>
+                        <th scope="col">Closing Time</th>
+                        <th scope="col">Shop Logo Image</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {shops.map(shop => (
+                        <tr key={shop._id}>
+                            <td>{shop.name}</td>
+                            <td>{shop.description}</td>
+                            <td>{shop.category}</td>
+                            <td>{shop.ownerName}</td>
+                            <td>{shop.contactNumber}</td>
+                            <td>{shop.email}</td>
+                            <td>{shop.floorNumber}</td>
+                            <td>{shop.openingTime}</td>
+                            <td>{shop.closingTime}</td>
+                            <td>{shop.logoImage}</td>
+                            <td>
+                                <button type="button" className="btn btn-warning" onClick={() => editShop(shop)}>Edit</button>
+                                <button type="button" className="btn btn-danger" onClick={() => DeleteShop(shop._id)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {/* Download Report Button */}
+            <div className="text-center">
+                <button className="btn btn-success mt-4" onClick={downloadReport}>Download Report</button>
+            </div>
+            <br />
+        </div>
+    );
+}
+
+export default Shop;
